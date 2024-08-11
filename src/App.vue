@@ -3,7 +3,10 @@
 
 <template>
   <div>
-    <router-view />
+    <the-navbar title="𝒫𝑜𝓈𝓉𝓈 𝒶𝓅𝓅" />
+    <div class="p-8">
+      <router-view />
+    </div>
   </div>
 </template>
 
