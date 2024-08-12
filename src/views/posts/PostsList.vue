@@ -10,7 +10,7 @@
                     class="border border-gray-400 px-4 py-2 rounded-md w-[400px]">
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <post-card v-for="post in posts" :key="post.id" :post="post" />
+                <PostListItem v-for="post in posts" :key="post.id" :post="post" />
             </div>
 
         </div>
@@ -21,6 +21,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { IPostList } from "../../types"
 import { useStore } from 'vuex';
+import PostListItem from '../../components/PostListItem.vue';
 
 const store = useStore();
 
