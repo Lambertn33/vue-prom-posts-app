@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { IPostList } from "../types"
+import { IPostList } from "@/types"
 
 defineProps<{ post: IPostList }>();
 </script>

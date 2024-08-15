@@ -1,13 +1,12 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-import Login from "../views/auth/Login.vue";
-import Signup from "../views/auth/Signup.vue";
+import Login from "@/views/auth/Login.vue";
+import Signup from "@/views/auth/Signup.vue";
 
-import PostsList from "../views/posts/PostsList.vue";
-import PostItem from "../views/posts/PostItem.vue";
-import CreatePost from "../views/posts/CreatePost.vue";
-import UpdatePost from "../views/posts/UpdatePost.vue";
-import PostComment from "../views/posts/PostComment.vue";
+import PostsList from "@/views/posts/PostsList.vue";
+import PostItem from "@/views/posts/PostItem.vue";
+import CreatePost from "@/views/posts/CreatePost.vue";
+import UpdatePost from "@/views/posts/UpdatePost.vue";
 
 const routes: RouteRecordRaw[] = [
   {
@@ -21,10 +20,6 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/posts/:id",
     component: UpdatePost,
-  },
-  {
-    path: "/posts/:id/comment",
-    component: PostComment,
   },
   {
     path: "/posts/create",

@@ -19,9 +19,9 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import { IPostList } from "../../types"
+import { IPostList } from "@/types"
 import { useStore } from 'vuex';
-import PostListItem from '../../components/PostListItem.vue';
+import PostListItem from '@/components/PostListItem.vue';
 
 const store = useStore();
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IPostList } from "../../types";
+import { IPostList } from "@/types";
 import { Module } from "vuex";
 
 const serverUrl = import.meta.env.VITE_SERVER_URL;

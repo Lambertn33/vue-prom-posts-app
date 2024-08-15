@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
-import { IPostItem } from "../../types"
+import { IPostItem } from "@/types"
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 
-import CommentForm from '../../components/CommentForm.vue';
+import CommentForm from '@/components/CommentForm.vue';
 
 const store = useStore();
 const route = useRoute();
