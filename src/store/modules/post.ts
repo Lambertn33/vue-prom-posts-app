@@ -1,11 +1,11 @@
 import axios from "axios";
-import { IPostItem } from "@/types";
+import { IPost } from "@/types";
 import { Module } from "vuex";
 
 const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 interface PostState {
-  post: IPostItem | null;
+  post: IPost | null;
   loading: boolean;
   error: string | null;
 }
@@ -39,7 +39,7 @@ const actions = {
 };
 
 const mutations = {
-  setPost(state: any, post: IPostItem) {
+  setPost(state: any, post: IPost) {
     state.post = post;
   },
 

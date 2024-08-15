@@ -1,13 +1,9 @@
-export interface IPostItem {
+export interface IPost {
   id: number;
   title: string;
   content: string;
   userId: number;
-  comments: {
-    content: string;
-    id: number;
-    user: User;
-  }[];
+  comments: Comment[];
   user: User;
 }
 
@@ -25,4 +21,10 @@ export interface IPostList {
 interface User {
   id: number;
   email: string;
+}
+
+interface Comment {
+  content: string;
+  id: number;
+  user: User;
 }

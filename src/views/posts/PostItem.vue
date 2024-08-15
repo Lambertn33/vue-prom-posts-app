@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
-import { IPostItem } from "@/types"
+import { IPost } from "@/types"
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 
@@ -9,7 +9,7 @@ import CommentForm from '@/components/CommentForm.vue';
 const store = useStore();
 const route = useRoute();
 const postId = route.params.id;
-const post = computed<IPostItem>(() => store.state.post.post.post);
+const post = computed<IPost>(() => store.state.post.post.post);
 const isLoading = computed<boolean>(() => store.state.post.loading);
 
 const fetchPost = () => {

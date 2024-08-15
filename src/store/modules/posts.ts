@@ -6,20 +6,25 @@ const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 interface PostsState {
   posts: IPostList[];
+  searchedPosts: IPostList[];
   loading: boolean;
+  searching: boolean;
   error: string | null;
 }
 
-const state = {
+const state: PostsState = {
   posts: [],
+  searchedPosts: [],
   loading: false,
+  searching: false,
   error: null as string | null,
 };
 
 const getters = {
-  allPosts: (state: any) => state.posts,
-  isLoading: (state: any) => state.loading,
-  getError: (state: any) => state.error,
+  allPosts: (state: PostsState) => state.posts,
+  isLoading: (state: PostsState) => state.loading,
+  getError: (state: PostsState) => state.error,
+  isSearching: (state: PostsState) => state.searching,
 };
 
 const actions = {
@@ -36,16 +41,42 @@ const actions = {
       commit("setLoading", false);
     }
   },
+
+  async searchPosts({ commit }: any, searchKey: string) {
+    commit("setSearching", true);
+    commit("setError", null);
+
+    try {
+      const response = await axios.post(`${serverUrl}/posts/search`, {
+        searchKey,
+      });
+      commit("setSearchedPosts", response.data);
+    } catch (error) {
+      commit("setError", "Failed to fetch posts");
+    } finally {
+      commit("setSearching", false);
+    }
+  },
 };
 
 const mutations = {
-  setPosts(state: any, posts: IPostList) {
+  setPosts(state: PostsState, posts: IPostList[]) {
     state.posts = posts;
   },
-  setLoading(state: any, loading: boolean) {
+
+  setSearchedPosts(state: PostsState, searchedPosts: IPostList[]) {
+    state.searchedPosts = searchedPosts;
+  },
+
+  setLoading(state: PostsState, loading: boolean) {
     state.loading = loading;
   },
-  setError(state: any, error: string | null) {
+
+  setSearching(state: PostsState, searching: boolean) {
+    state.searching = searching;
+  },
+
+  setError(state: PostsState, error: string | null) {
     state.error = error;
   },
 };
