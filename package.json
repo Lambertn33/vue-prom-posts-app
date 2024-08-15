@@ -11,9 +11,11 @@
   "dependencies": {
     "axios": "^1.7.3",
     "oh-vue-icons": "^1.0.0-rc3",
+    "persisted-state-vuex": "^1.1.0",
     "vue": "^3.4.35",
     "vue-router": "^4.4.3",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.2",
