@@ -11,6 +11,7 @@ const route = useRoute();
 const postId = route.params.id;
 const post = computed<IPost>(() => store.state.post.post.post);
 const isLoading = computed<boolean>(() => store.state.post.loading);
+const isAuthenticated = computed<boolean>(() => store.getters['auth/isAuthenticated'])
 
 const fetchPost = () => {
     store.dispatch('post/fetchPost', postId);
@@ -51,7 +52,13 @@ onMounted(() => fetchPost());
                 </div>
 
                 <!-- Add Comment Section -->
-                <CommentForm />
+                <div v-if="isAuthenticated">
+                    <CommentForm />
+                </div>
+                <div v-else class="flex items-end gap-x-1">
+                    <v-icon name="io-warning-sharp" scale="1" fill="#EF4444" />
+                    <p class="text-red-500 text-sm font-bold">Login to make a comment</p>
+                </div>
             </div>
         </div>
     </div>

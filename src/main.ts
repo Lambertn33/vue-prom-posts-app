@@ -14,9 +14,9 @@ import PostCard from "./components/PostCard.vue";
 
 import { OhVueIcon, addIcons } from "oh-vue-icons";
 
-import { FaUser, MdComment } from "oh-vue-icons/icons";
+import { FaUser, MdComment, IoWarningSharp } from "oh-vue-icons/icons";
 
-addIcons(FaUser, MdComment);
+addIcons(FaUser, MdComment, IoWarningSharp);
 
 import "./style.css";
 
