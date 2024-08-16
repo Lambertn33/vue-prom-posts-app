@@ -17,12 +17,12 @@ const links: Link[] = [
 
 </script>
 <template>
-    <div class="bg-blue-600 w-full flex justify-between px-8 py-4">
-        <h2 class="text-3xl font-semibold text-white">{{ title }}</h2>
+    <div class="bg-[#d9d9d9] w-full flex justify-between px-8 py-4">
+        <h2 class="text-3xl font-bold text-black">{{ title }}</h2>
         <div class="flex gap-x-4 items-center">
             <router-link :data-cy="link.dataCy" v-for="link in links" :to="link.to" activeClass="text-gray-300"
                 exactActiveClass="font-bold text-red-600">
-                <span class="text-white font-semibold hover:text-gray-300"> {{ link.label }}</span>
+                <span class="text-black font-semibold hover:underline transition-all"> {{ link.label }}</span>
             </router-link>
         </div>
     </div>

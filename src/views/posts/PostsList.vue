@@ -7,7 +7,7 @@
         <div v-else class="w-full">
             <div class="flex justify-center py-4">
                 <input type="text" v-model="searchKey" placeholder="search post..."
-                    class="border border-gray-400 px-4 py-2 rounded-md w-[400px]">
+                    class="border border-gray-400 px-4 py-2 rounded-full w-[600px]">
             </div>
             <div v-if="isSearching" class="flex justify-center">
                 <p>Please wait....</p>
