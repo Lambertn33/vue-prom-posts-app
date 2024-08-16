@@ -15,7 +15,7 @@ export interface IPostList {
   _count: {
     comments: number;
   };
-  user?: IUser;
+  user: IUser;
 }
 
 export interface IUser {
