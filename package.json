@@ -13,10 +13,12 @@
     "lodash": "^4.17.21",
     "oh-vue-icons": "^1.0.0-rc3",
     "persisted-state-vuex": "^1.1.0",
+    "vee-validate": "^4.13.2",
     "vue": "^3.4.35",
     "vue-router": "^4.4.3",
     "vuex": "^4.0.2",
-    "vuex-persistedstate": "^4.1.0"
+    "vuex-persistedstate": "^4.1.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^22.3.0",

@@ -4,7 +4,7 @@ export interface IPost {
   content: string;
   userId: number;
   comments: Comment[];
-  user: User;
+  user: IUser;
 }
 
 export interface IPostList {
@@ -15,10 +15,10 @@ export interface IPostList {
   _count: {
     comments: number;
   };
-  user: User;
+  user: IUser;
 }
 
-interface User {
+export interface IUser {
   id: number;
   email: string;
 }
@@ -26,5 +26,9 @@ interface User {
 interface Comment {
   content: string;
   id: number;
-  user: User;
+  user: IUser;
+}
+
+export interface IUserInputs extends IUser {
+  password: string;
 }
