@@ -19,7 +19,7 @@ const routes: RouteRecordRaw[] = [
     component: PostItem,
   },
   {
-    path: "/posts/:id/update",
+    path: "/posts/:id/edit",
     component: UpdatePost,
     beforeEnter: (to, from, next) => {
       const store = useStore();

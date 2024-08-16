@@ -8,12 +8,14 @@ interface PostState {
   post: IPost | null;
   loading: boolean;
   error: string | null;
+  updating: boolean;
 }
 
 const state = {
   post: null,
   loading: false,
   error: null as string | null,
+  updating: false,
 };
 
 const getters = {
@@ -29,6 +31,36 @@ const actions = {
 
     try {
       const response = await axios.get(`${serverUrl}/posts/${postId}`);
+      commit("setPost", response.data);
+    } catch (error) {
+      commit("setError", "Failed to fetch post");
+    } finally {
+      commit("setLoading", false);
+    }
+  },
+
+  async updatePost(
+    { commit }: any,
+    {
+      postId,
+      title,
+      content,
+    }: { postId: number; title: string; content: string }
+  ) {
+    commit("setLoading", true);
+    commit("setError", null);
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.put(
+        `${serverUrl}/posts/${postId}`,
+        { title, content },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       commit("setPost", response.data);
     } catch (error) {
       commit("setError", "Failed to fetch post");
