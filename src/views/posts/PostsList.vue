@@ -1,6 +1,11 @@
 <template>
     <div class="p-4">
-        <h2 class="text-2xl flex justify-center font-bold">Posts List</h2>
+        <div class="flex justify-center items-center gap-x-3">
+            <h2 class="text-2xl flex justify-center font-bold">Posts List</h2>
+            <router-link v-if="isAuthenticated" to="/posts/create">
+                <span class="text-blue-500 hover:text-blue-800 hover:underline">Create new post</span>
+            </router-link>
+        </div>
         <div v-if="isLoading" class="flex justify-center items-center">
             <div class="loader">Loading...</div>
         </div>
@@ -38,6 +43,7 @@ const posts = computed<IPostList[]>(() => store.state.posts.posts.posts);
 const isLoading = computed<boolean>(() => store.state.posts.loading);
 const isSearching = computed<boolean>(() => store.state.posts.searching);
 const searchedPosts = computed<IPostList[]>(() => store.state.posts.searchedPosts.searchedPosts);
+const isAuthenticated = computed<boolean>(() => store.getters["auth/isAuthenticated"]);
 
 const postsToDisplay = computed(() => {
     return searchKey.value !== "" && searchedPosts.value.length > 0

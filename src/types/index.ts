@@ -15,7 +15,7 @@ export interface IPostList {
   _count: {
     comments: number;
   };
-  user: IUser;
+  user?: IUser;
 }
 
 export interface IUser {
@@ -29,6 +29,8 @@ interface Comment {
   user: IUser;
 }
 
-export interface IUserInputs extends IUser {
-  password: string;
+export interface IPostInputs {
+  title: string;
+  content: string;
+  userId: number;
 }

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { useStore } from "vuex";
 
 import Login from "@/views/auth/Login.vue";
 import Signup from "@/views/auth/Signup.vue";
@@ -18,12 +19,28 @@ const routes: RouteRecordRaw[] = [
     component: PostItem,
   },
   {
-    path: "/posts/:id",
+    path: "/posts/:id/update",
     component: UpdatePost,
+    beforeEnter: (to, from, next) => {
+      const store = useStore();
+      if (store.getters["auth/isAuthenticated"]) {
+        next();
+      } else {
+        next("/");
+      }
+    },
   },
   {
     path: "/posts/create",
     component: CreatePost,
+    beforeEnter: (to, from, next) => {
+      const store = useStore();
+      if (store.getters["auth/isAuthenticated"]) {
+        next();
+      } else {
+        next("/");
+      }
+    },
   },
 
   {

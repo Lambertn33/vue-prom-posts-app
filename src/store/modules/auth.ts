@@ -23,6 +23,7 @@ const getters: GetterTree<AuthState, any> = {
   isLoading: (state: AuthState) => state.loading,
   getError: (state: AuthState) => state.error,
   isAuthenticated: (state: AuthState) => !!state.token,
+  token: (state: AuthState) => state.token,
 };
 
 const actions: ActionTree<AuthState, any> = {

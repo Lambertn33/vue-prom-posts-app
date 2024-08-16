@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IPostList } from "@/types";
+import { IPostInputs, IPostList } from "@/types";
 import { Module } from "vuex";
 
 const serverUrl = import.meta.env.VITE_SERVER_URL;
@@ -37,6 +37,25 @@ const actions = {
       commit("setPosts", response.data);
     } catch (error) {
       commit("setError", "Failed to fetch posts");
+    } finally {
+      commit("setLoading", false);
+    }
+  },
+
+  async createPost({ commit }: any, postInputs: IPostInputs) {
+    commit("setLoading", true);
+    commit("setError", null);
+
+    try {
+      const token = localStorage.getItem("token");
+      await axios.post(`${serverUrl}/posts`, postInputs, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      commit("setError", "Failed to create posts");
     } finally {
       commit("setLoading", false);
     }
