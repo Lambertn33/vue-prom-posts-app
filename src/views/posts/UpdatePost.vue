@@ -35,11 +35,12 @@
 import { useStore } from "vuex";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { computed, onMounted } from "vue";
 
 const store = useStore();
 const route = useRoute();
+const router = useRouter();
 const postId = route.params.id;
 const post = computed(() => store.getters['post/getPost'].post);
 const isUpdating = computed(() => store.state.post.updating);
@@ -67,5 +68,13 @@ const submitForm = handleSubmit(async (formData) => {
     store.commit("post/setUpdating", false);
     window.location.href = `/posts/${postId}`;
 });
+
+// avoid editing someone else's post
+onMounted(() => {
+    const authenticatedUser = computed(() => store.getters['auth/user']);
+    if (authenticatedUser.value.id !== post.value.userId) {
+        router.push({ path: `/posts/${post.value.id}` });
+    }
+})
 
 </script>
