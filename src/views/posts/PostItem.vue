@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onBeforeUnmount, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { IPost } from "@/types"
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';

@@ -21,7 +21,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/posts/:id/edit",
     component: UpdatePost,
-    beforeEnter: (to, from, next) => {
+    beforeEnter: (_to, _from, next) => {
       const store = useStore();
       if (store.getters["auth/isAuthenticated"]) {
         next();
@@ -33,7 +33,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/posts/create",
     component: CreatePost,
-    beforeEnter: (to, from, next) => {
+    beforeEnter: (_to, _from, next) => {
       const store = useStore();
       if (store.getters["auth/isAuthenticated"]) {
         next();

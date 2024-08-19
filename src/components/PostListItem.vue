@@ -21,8 +21,6 @@
 
 <script setup lang="ts">
 import { IPostList } from "@/types"
-import { useStore } from "vuex";
 
-const props = defineProps<{ post: IPostList }>();
-const store = useStore();
+defineProps<{ post: IPostList }>();
 </script>
