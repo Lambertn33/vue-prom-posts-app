@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, onBeforeUnmount, ref } from 'vue';
 import { IPost } from "@/types"
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
@@ -9,14 +9,18 @@ import CommentForm from '@/components/CommentForm.vue';
 const store = useStore();
 const route = useRoute();
 const postId = route.params.id;
-const post = computed<IPost>(() => store.state.post.post.post);
+const post = computed<IPost>(() => store.state.post?.post?.post);
 const isLoading = computed<boolean>(() => store.state.post.loading);
-const isAuthenticated = computed<boolean>(() => store.getters['auth/isAuthenticated'])
+const isAuthenticated = computed<boolean>(() => store.getters['auth/isAuthenticated']);
+const user = store.getters['auth/user'] ? store.getters['auth/user'] : null;
+const canEdit = ref<boolean>(false);
 
-const fetchPost = () => {
-    store.dispatch('post/fetchPost', postId);
+const fetchPost = async () => {
+    const post = await store.dispatch('post/fetchPost', postId);
+    canEdit.value = post.post.userId === user.id;
 };
 onMounted(() => fetchPost());
+
 </script>
 
 
@@ -31,8 +35,13 @@ onMounted(() => fetchPost());
 
             <div v-else>
                 <div class="mb-6">
-                    <h3 class="text-xl font-semibold mb-2">{{ post?.title }}</h3>
-                    <p class="text-gray-700">{{ post?.content }}</p>
+                    <div class="flex justify-between">
+                        <h3 class="text-xl font-semibold mb-2">{{ post?.title }}</h3>
+                        <router-link :to="`/posts/${post.id}/edit`" v-if="canEdit">
+                            <v-icon name="ri-edit-box-fill" scale="1" />
+                        </router-link>
+                    </div>
+                    <p class="text-gray-700 text-sm">{{ post?.content }}</p>
                 </div>
 
                 <!-- Comments Section -->

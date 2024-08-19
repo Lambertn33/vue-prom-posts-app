@@ -15,9 +15,6 @@
                         <v-icon name="md-comment" scale="1" />
                         <span class="text-xs font-bold">{{ post._count.comments }}</span>
                     </div>
-                    <router-link :to="`/posts/${post.id}/edit`" v-if="canEdit">
-                        <v-icon name="ri-edit-box-fill" scale="1" />
-                    </router-link>
                 </div>
             </div>
         </router-link>
@@ -30,6 +27,4 @@ import { useStore } from "vuex";
 
 const props = defineProps<{ post: IPostList }>();
 const store = useStore();
-const user = store.getters['auth/user'] ? store.getters['auth/user'] : null;
-const canEdit = user !== null && user.id === props.post.userId
 </script>

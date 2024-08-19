@@ -19,9 +19,10 @@ const state = {
 };
 
 const getters = {
-  Post: (state: any) => state.post,
-  isLoading: (state: any) => state.loading,
-  getError: (state: any) => state.error,
+  getPost: (state: PostState) => state.post,
+  isLoading: (state: PostState) => state.loading,
+  getError: (state: PostState) => state.error,
+  isUpdating: (state: PostState) => state.updating,
 };
 
 const actions = {
@@ -32,6 +33,7 @@ const actions = {
     try {
       const response = await axios.get(`${serverUrl}/posts/${postId}`);
       commit("setPost", response.data);
+      return response.data;
     } catch (error) {
       commit("setError", "Failed to fetch post");
     } finally {
@@ -47,9 +49,6 @@ const actions = {
       content,
     }: { postId: number; title: string; content: string }
   ) {
-    commit("setLoading", true);
-    commit("setError", null);
-
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
@@ -65,7 +64,7 @@ const actions = {
     } catch (error) {
       commit("setError", "Failed to fetch post");
     } finally {
-      commit("setLoading", false);
+      commit("setUpdating", false);
     }
   },
 };
@@ -75,11 +74,14 @@ const mutations = {
     state.post = post;
   },
 
-  setLoading(state: any, loading: boolean) {
+  setLoading(state: PostState, loading: boolean) {
     state.loading = loading;
   },
-  setError(state: any, error: string | null) {
+  setError(state: PostState, error: string | null) {
     state.error = error;
+  },
+  setUpdating(state: PostState, updating: boolean) {
+    state.updating = updating;
   },
 };
 

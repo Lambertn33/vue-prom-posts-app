@@ -1,9 +1,6 @@
 <template>
     <div class="flex justify-center items-center h-full bg-gray-100">
-        <div v-if="isLoading">
-            <p>Please wait.....</p>
-        </div>
-        <form v-else class="w-full max-w-xl bg-white shadow-md rounded-lg p-6" @submit.prevent="submitForm">
+        <form class="w-full max-w-xl bg-white shadow-md rounded-lg p-6" @submit.prevent="submitForm">
             <h2 class="text-2xl font-bold mb-4 text-center">Update Post</h2>
 
             <div class="mt-3">
@@ -25,9 +22,9 @@
             </div>
 
             <div class="mt-3">
-                <button
+                <button :disabled="isUpdating"
                     class="mt-4 w-full px-4 py-3 bg-black text-white rounded-full hover:bg-gray-600 focus:outline-none focus:ring focus:ring-blue-300">
-                    <span class="font-semibold">{{ isLoading ? "Please wait.." : "Update Post" }}</span>
+                    <span class="font-semibold">{{ isUpdating ? "Please wait.." : "Update Post" }}</span>
                 </button>
             </div>
         </form>
@@ -44,14 +41,8 @@ import { computed, onMounted } from "vue";
 const store = useStore();
 const route = useRoute();
 const postId = route.params.id;
-const post = computed(() => store.state.post.post.post);
-const isLoading = computed<boolean>(() => store.state.post.loading);
-
-const fetchPost = () => {
-    store.dispatch('post/fetchPost', postId);
-};
-
-onMounted(() => fetchPost());
+const post = computed(() => store.getters['post/getPost'].post);
+const isUpdating = computed(() => store.state.post.updating);
 
 const schema = yup.object({
     title: yup.string().required("Title is required"),
@@ -71,9 +62,9 @@ const { value: content } = useField<string>("content");
 
 const submitForm = handleSubmit(async (formData) => {
     const updatedFormData = { ...formData, postId };
+    store.commit("post/setUpdating", true);
     await store.dispatch("post/updatePost", updatedFormData);
-    window.location.href = "/";
+    store.commit("post/setUpdating", false);
 });
-
 
 </script>

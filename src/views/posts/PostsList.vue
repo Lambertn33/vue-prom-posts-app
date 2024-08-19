@@ -18,7 +18,8 @@
                 <p>Please wait....</p>
             </div>
             <div v-else>
-                <div v-if="postsToDisplay.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div v-if="postsToDisplay && postsToDisplay.length > 0"
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <PostListItem v-for="post in postsToDisplay" :key="post.id" :post="post" />
                 </div>
                 <div v-else class="flex justify-center">
