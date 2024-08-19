@@ -65,6 +65,7 @@ const submitForm = handleSubmit(async (formData) => {
     store.commit("post/setUpdating", true);
     await store.dispatch("post/updatePost", updatedFormData);
     store.commit("post/setUpdating", false);
+    window.location.href = `/posts/${postId}`;
 });
 
 </script>
