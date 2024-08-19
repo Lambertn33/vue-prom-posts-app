@@ -3,17 +3,16 @@
         <h4 class="text-lg font-bold mb-2">Add a Comment</h4>
         <form @submit.prevent="submitComment">
             <div>
-                <textarea v-model="comment"
-                    class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-                    rows="2" placeholder="Write your comment here..."></textarea>
-                <span v-if="errors.comment" class="text-red-500 font-bold text-sm mt-1">{{ errors.comment }}</span>
+                <text-area label="Comment" placeholder="Write your comment here..." v-model="comment"
+                    :error="errors.comments" />
             </div>
-            <button :disabled="isAddingComment"
+            <!-- <button :disabled="isAddingComment"
                 class="mt-4 px-4 py-2 bg-black text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300">
                 <span class="font-semibold text-sm">
                     {{ isAddingComment ? "Submitting..." : "Submit Comment" }}
                 </span>
-            </button>
+            </button> -->
+            <the-button :loading="isAddingComment" text="Add comment" :disabled="isAddingComment" />
         </form>
     </div>
 </template>

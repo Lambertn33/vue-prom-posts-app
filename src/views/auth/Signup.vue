@@ -4,30 +4,18 @@
             <h2 class="text-2xl font-bold mb-4 text-center">Sign up</h2>
 
             <div class="mt-3">
-                <div class="flex flex-col">
-                    <h6 class="font-semibold mb-2">Email</h6>
-                    <input type="email" v-model="email" placeholder="enter your email..."
-                        class="border border-gray-400 px-4 py-2 rounded-full" />
-                    <span v-if="errors.email" class="text-red-500 font-bold text-sm mt-1">{{ errors.email }}</span>
-                    <span v-if="localError" class="text-red-500 font-bold text-sm mt-1">{{ localError }}</span>
-                </div>
+                <the-input type="email" label="Email" placeholder="Enter your email..." v-model="email"
+                    :error="errors.email" />
+                <span v-if="localError" class="text-red-500 font-bold text-sm mt-1">{{ localError }}</span>
             </div>
 
             <div class="mt-3">
-                <div class="flex flex-col">
-                    <h6 class="font-semibold mb-2">Password</h6>
-                    <input type="password" v-model="password" placeholder="enter your password..."
-                        class="border border-gray-400 px-4 py-2 rounded-full" />
-                    <span v-if="errors.password" class="text-red-500 font-bold text-sm mt-1">{{ errors.password
-                        }}</span>
-                </div>
+                <the-input type="password" label="Password" placeholder="Enter your password..." v-model="password"
+                    :error="errors.password" />
             </div>
 
             <div class="mt-3">
-                <button :disabled="isLoading"
-                    class="mt-4 w-full px-4 py-3 bg-black text-white rounded-full hover:bg-gray-600 focus:outline-none focus:ring focus:ring-blue-300">
-                    <span class="font-semibold">{{ isLoading ? "Please wait.." : "Signup" }}</span>
-                </button>
+                <the-button :loading="isLoading" text="Signup" :disabled="isLoading" />
             </div>
         </form>
     </div>

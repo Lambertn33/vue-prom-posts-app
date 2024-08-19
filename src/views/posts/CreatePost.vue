@@ -4,28 +4,15 @@
             <h2 class="text-2xl font-bold mb-4 text-center">Create post</h2>
 
             <div class="mt-3">
-                <div class="flex flex-col">
-                    <h6 class="font-semibold mb-2">Title</h6>
-                    <input type="text" placeholder="enter post title..." v-model="title"
-                        class="border border-gray-400 px-4 py-2 rounded-full" />
-                    <span v-if="errors.title" class="text-red-500 font-bold text-sm mt-1">{{ errors.title }}</span>
-                </div>
+                <the-input label="Title" placeholder="Enter post title..." v-model="title" :error="errors.title" />
             </div>
             <div class="mt-3">
-                <div class="flex flex-col">
-                    <h6 class="font-semibold mb-2">Content</h6>
-                    <textarea v-model="content"
-                        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-                        rows="3" placeholder="Write your comment here..."></textarea>
-                    <span v-if="errors.content" class="text-red-500 font-bold text-sm mt-1">{{ errors.content }}</span>
-                </div>
+                <text-area label="Content" placeholder="Write your comment here..." v-model="content"
+                    :error="errors.content" />
             </div>
 
             <div class="mt-3">
-                <button
-                    class="mt-4 w-full px-4 py-3 bg-black text-white rounded-full hover:bg-gray-600 focus:outline-none focus:ring focus:ring-blue-300">
-                    <span class="font-semibold">{{ isCreating ? "Please wait.." : "Create Post" }}</span>
-                </button>
+                <the-button :loading="isCreating" text="Create Post" :disabled="isCreating" />
             </div>
         </form>
     </div>
