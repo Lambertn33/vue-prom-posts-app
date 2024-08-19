@@ -24,7 +24,7 @@
             <div class="mt-3">
                 <button
                     class="mt-4 w-full px-4 py-3 bg-black text-white rounded-full hover:bg-gray-600 focus:outline-none focus:ring focus:ring-blue-300">
-                    <!-- <span class="font-semibold">{{ isLoading ? "Please wait.." : "Signup" }}</span> -->Create Post
+                    <span class="font-semibold">{{ isCreating ? "Please wait.." : "Create Post" }}</span>
                 </button>
             </div>
         </form>
@@ -35,8 +35,10 @@
 import { useStore } from "vuex";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
+import { computed } from "vue";
 
 const store = useStore();
+const isCreating = computed(() => store.state.posts.loading);
 
 const schema = yup.object({
     title: yup.string().required("Title is required"),

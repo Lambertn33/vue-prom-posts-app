@@ -9,6 +9,7 @@ interface PostState {
   loading: boolean;
   error: string | null;
   updating: boolean;
+  commenting: boolean;
 }
 
 const state = {
@@ -16,6 +17,7 @@ const state = {
   loading: false,
   error: null as string | null,
   updating: false,
+  commenting: false,
 };
 
 const getters = {
@@ -23,6 +25,7 @@ const getters = {
   isLoading: (state: PostState) => state.loading,
   getError: (state: PostState) => state.error,
   isUpdating: (state: PostState) => state.updating,
+  isAddingComment: (state: PostState) => state.commenting,
 };
 
 const actions = {
@@ -67,10 +70,32 @@ const actions = {
       commit("setUpdating", false);
     }
   },
+
+  async addPostComment(
+    { commit }: any,
+    { postId, comment }: { postId: number; userId: number; comment: string }
+  ) {
+    try {
+      const token = localStorage.getItem("token");
+      await axios.post(
+        `${serverUrl}/posts/${postId}/comment`,
+        { comment },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (error) {
+      commit("setError", "Failed to make a comment");
+    } finally {
+      commit("setCommenting", false);
+    }
+  },
 };
 
 const mutations = {
-  setPost(state: any, post: IPost) {
+  setPost(state: PostState, post: IPost) {
     state.post = post;
   },
 
@@ -82,6 +107,10 @@ const mutations = {
   },
   setUpdating(state: PostState, updating: boolean) {
     state.updating = updating;
+  },
+
+  setCommenting(state: PostState, commenting: boolean) {
+    state.commenting = commenting;
   },
 };
 

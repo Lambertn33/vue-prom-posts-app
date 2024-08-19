@@ -47,13 +47,15 @@ onMounted(() => fetchPost());
                 <!-- Comments Section -->
                 <div class="border-t border-gray-200 pt-4">
                     <h4 class="text-lg font-bold mb-4">Comments</h4>
-                    <div v-if="post?.comments.length" v-for="comment in post?.comments" :key="comment.id"
-                        class="mb-4 p-4 bg-gray-100 rounded-md">
-                        <div class="flex gap-x-1">
-                            <v-icon name="fa-user" scale="1" />
-                            <p class="text-sm text-gray-600 mb-2">{{ comment.user.email }}</p>
+                    <div v-if="post?.comments.length" class="overflow-y-auto max-h-[250px]">
+                        <div v-for="comment in post?.comments" :key="comment.id"
+                            class="mb-4 p-4 bg-gray-100 rounded-md">
+                            <div class="flex gap-x-1">
+                                <v-icon name="fa-user" scale="1" />
+                                <p class="text-sm text-gray-600 mb-2">{{ comment.user.email }}</p>
+                            </div>
+                            <p class="text-sm">{{ comment.content }}</p>
                         </div>
-                        <p class="text-sm">{{ comment.content }}</p>
                     </div>
                     <div v-else class="flex justify-center">
                         <span class="text-red-600 font-bold text-center text-sm">No comments yet</span>

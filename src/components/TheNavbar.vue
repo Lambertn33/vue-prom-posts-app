@@ -30,7 +30,6 @@ const publicLinks: Link[] = [
 
 const privateLinks: Link[] = [
     { to: '/', label: 'Home', dataCy: 'home-link' },
-    { to: "/", label: 'My Posts', dataCy: 'my-posts-link' }
 ];
 
 const links = isAuthenticated ? privateLinks : publicLinks;
