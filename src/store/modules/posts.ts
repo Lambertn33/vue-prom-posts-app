@@ -1,6 +1,6 @@
 import axios from "axios";
 import { IPostInputs, IPostList } from "@/types";
-import { Module } from "vuex";
+import { ActionTree, GetterTree, Module, MutationTree } from "vuex";
 
 const serverUrl = import.meta.env.VITE_SERVER_URL;
 
@@ -20,14 +20,14 @@ const state: PostsState = {
   error: null as string | null,
 };
 
-const getters = {
+const getters: GetterTree<PostsState, any> = {
   allPosts: (state: PostsState) => state.posts,
   isLoading: (state: PostsState) => state.loading,
   getError: (state: PostsState) => state.error,
   isSearching: (state: PostsState) => state.searching,
 };
 
-const actions = {
+const actions: ActionTree<PostsState, any> = {
   async fetchPosts({ commit }: any) {
     commit("setLoading", true);
     commit("setError", null);
@@ -78,7 +78,7 @@ const actions = {
   },
 };
 
-const mutations = {
+const mutations: MutationTree<PostsState> = {
   setPosts(state: PostsState, posts: IPostList[]) {
     state.posts = posts;
   },
