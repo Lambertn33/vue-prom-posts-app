@@ -10,11 +10,9 @@
                     <v-icon name="fa-user" scale="1" />
                     <span class="text-xs font-bold">{{ post.user.email }}</span>
                 </div>
-                <div class="flex items-center mt-4 gap-1">
-                    <div>
-                        <v-icon name="md-comment" scale="1" />
-                        <span class="text-xs font-bold">{{ post._count.comments }}</span>
-                    </div>
+                <div class="flex items-center mt-4 gap-2">
+                    <v-icon name="md-comment" scale="1" />
+                    <span class="text-xs font-bold">{{ post._count.comments }}</span>
                 </div>
             </div>
         </router-link>
